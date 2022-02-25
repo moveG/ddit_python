@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas02</title>
+	<script type="text/javascript">
+		function fn_init(){
+			var canvas = document.querySelector('canvas');
+			var ctx = canvas.getContext('2d');
+			ctx.beginPath();
+			ctx.rect(0, 0, 100, 100);
+			ctx.fillStyle = "blue";
+			ctx.fill();
+			ctx.clothPath();
+		}	
+	</script>
+</head>
+<body onload="fn_init()">
+	<canvas width="200" height="200" style="border:2px solid red;"></canvas>
+</body>
+</html>

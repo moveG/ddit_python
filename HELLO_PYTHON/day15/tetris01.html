@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tetris01</title>
+	<script type="text/javascript">
+		class Block {
+			constructor(status, type, i, j){
+				this.status = status;
+				this.type   = type;
+				this.i      = i;
+				this.j      = j;
+			}
+		}
+		
+		var block = new Block(3, 7, 2, 4);
+		var block2d = 
+		[
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],	
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],	
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],	
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],	
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0,  0, 0, 0, 0, 0]
+		];
+		
+		function setBlock2dFromBlock(){
+			if(block.type == 1){
+				if(block.status == 0){
+					block2d[block.i    ][block.j    ] = block.type;		
+					block2d[block.i + 1][block.j    ] = block.type;		
+					block2d[block.i    ][block.j + 1] = block.type;		
+					block2d[block.i + 1][block.j + 1] = block.type;		
+				}
+			}
+			
+			if(block.type == 2){
+				if(block.status == 0){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j    ] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+					block2d[block.i + 2][block.j    ] = block.type;
+				}
+				if(block.status == 1){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+					block2d[block.i    ][block.j + 2] = block.type;
+				}
+			}
+			
+			if(block.type == 3){
+				if(block.status == 0){
+					block2d[block.i    ][block.j    ] = block.type;	
+					block2d[block.i    ][block.j - 1] = block.type;	
+					block2d[block.i + 1][block.j    ] = block.type;	
+					block2d[block.i + 1][block.j + 1] = block.type;	
+				}
+				if(block.status == 1){
+					block2d[block.i    ][block.j    ] = block.type;	
+					block2d[block.i - 1][block.j    ] = block.type;	
+					block2d[block.i    ][block.j - 1] = block.type;	
+					block2d[block.i + 1][block.j - 1] = block.type;	
+				}
+			}
+			
+			if(block.type == 4){
+				if(block.status == 0){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+					block2d[block.i + 1][block.j - 1] = block.type;
+				}
+				if(block.status == 1){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i - 1][block.j - 1] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+				}
+			}
+			
+			if(block.type == 5){
+				if(block.status == 0){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+					block2d[block.i + 1][block.j + 1] = block.type;
+				}
+				if(block.status == 1){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j    ] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+					block2d[block.i + 1][block.j - 1] = block.type;
+				}
+				if(block.status == 2){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j - 1] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+				}
+				if(block.status == 3){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j    ] = block.type;
+					block2d[block.i - 1][block.j + 1] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+				}
+			}
+			
+			if(block.type == 6){
+				if(block.status == 0){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i + 1][block.j - 1] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+				}
+				if(block.status == 1){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j - 1] = block.type;
+					block2d[block.i - 1][block.j    ] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+				}
+				if(block.status == 2){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+					block2d[block.i - 1][block.j + 1] = block.type;
+				}
+				if(block.status == 3){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j    ] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+					block2d[block.i + 1][block.j + 1] = block.type;
+				}
+			}
+			
+			if(block.type == 7){
+				if(block.status == 0){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j    ] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+				}
+				if(block.status == 1){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j    ] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+				}
+				if(block.status == 2){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;
+					block2d[block.i    ][block.j + 1] = block.type;
+				}
+				if(block.status == 3){
+					block2d[block.i    ][block.j    ] = block.type;
+					block2d[block.i - 1][block.j    ] = block.type;
+					block2d[block.i    ][block.j - 1] = block.type;
+					block2d[block.i + 1][block.j    ] = block.type;		
+				}
+			}
+		}
+		
+		function fn_init(){
+			setBlock2dFromBlock();
+			console.log(block2d);
+		}
+	</script>
+</head>
+<body>
+	<a href="javascript:fn_init()">연습</a>
+</body>
+</html>

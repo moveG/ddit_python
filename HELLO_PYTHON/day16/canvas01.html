@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas01</title>
+	<script type="text/javascript">
+		function fn_init(){
+			var canvas = document.querySelector('canvas');
+			var ctx = canvas.getContext('2d');
+			ctx.beginPath();
+			ctx.arc(150, 150, 100, 0, Math.PI * 2);
+			/* ctx.strokeStyle = "red";
+			ctx.stroke(); */
+			ctx.fillStyle = "green";
+			ctx.fill();
+			ctx.clothPath();
+		}	
+	</script>
+</head>
+<body onload="fn_init()">
+	<canvas width="500" height="500"></canvas>
+</body>
+</html>

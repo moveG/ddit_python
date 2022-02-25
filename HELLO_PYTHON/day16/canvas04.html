@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas04</title>
+	<script type="text/javascript">
+		function fn_init(){
+			var canvas = document.querySelector('canvas');
+			var ctx = canvas.getContext('2d');
+			
+			var img = new Image();
+			img.src = "spongebob.png";
+			
+			img.onload = function(){
+				ctx.drawImage(img, 100, 100, 500, 500);
+			}
+		}	
+	</script>
+</head>
+<body onload="fn_init()">
+	<canvas width="800" height="800" style="border:2px solid black;"></canvas>
+</body>
+</html>

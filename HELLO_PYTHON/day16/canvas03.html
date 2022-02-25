@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas03</title>
+	<script type="text/javascript">
+		function fn_init(){
+			var canvas = document.querySelector('canvas');
+			var ctx = canvas.getContext('2d');
+			ctx.beginPath();
+			ctx.font = "100px Serif";
+			ctx.fillStyle = "red";
+			ctx.fillText("Hello World", 20, 100);
+			
+			ctx.font = "100px 궁서체";
+			ctx.fillStyle = "black";
+			ctx.fillText("진지해서 궁서체", 20, 300);
+			
+			ctx.font = "100px 고딕체";
+			ctx.fillStyle = "blue";
+			ctx.fillText("고딕양식 고딕체", 20, 500);
+			
+			ctx.font = "100px 바탕체";
+			ctx.strokeStyle = "orange";
+			ctx.strokeText("그냥 바탕체", 20, 700);
+			ctx.clothPath();
+		}	
+	</script>
+</head>
+<body onload="fn_init()">
+	<canvas width="800" height="800" style="border:2px solid red;"></canvas>
+</body>
+</html>

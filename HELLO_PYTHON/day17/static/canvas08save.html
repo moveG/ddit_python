@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas08</title>
+	<script type="text/javascript">
+		var canvas1;
+		var canvas2;
+		
+		function fn_init(){
+			canvas1 = document.querySelector('#can01');
+			var ctx1 = canvas1.getContext('2d');
+			
+			canvas2 = document.querySelector('#can02');
+			var ctx2 = canvas2.getContext('2d');
+			
+			var img = new Image();
+			img.src = "호랑이.jpg";
+			
+			img.onload = function(){
+				ctx1.drawImage(img, 0, 0, 300, 300);
+				
+				ctx2.translate(150, 150);
+				ctx2.rotate(Math.PI / 4);
+				ctx2.translate(-150, -150);
+				ctx2.drawImage(img, 0, 0, 300, 300);
+				
+				var link = document.querySelector('#mya');
+				link.download = '호랑이.jpg';
+				link.href = canvas2.toDataURL();
+				link.click();
+			}
+		}	
+	</script>
+</head>
+<body onload="fn_init()">
+	<canvas id="can01" width="300" height="300" style="border:2px solid blue;"></canvas>
+	<canvas id="can02" width="300" height="300" style="border:2px solid red;"></canvas>
+	<a id="mya">다운로드</a>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/jquery-3.6.0.js"></script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+		
+		<title>SAWON CRUD</title>
+		<script type="text/javascript">
+			function fn_setdata(s_id, s_name, age, address, in_date){
+				$('#s_id').val(s_id);
+				$('#s_name').val(s_name);
+				$('#age').val(age);
+				$('#address').val(address);
+				$('#in_date').val(in_date);
+			}
+			
+			function fn_insert(){
+				var s_name = $('#s_name').val();
+				var age = $('#age').val();
+				var address = $('#address').val();
+	            
+	            var postdata = {
+	                's_name':s_name, 'age':age, 'address':address
+	            }
+				
+				$.ajax({
+	                type: 'POST',
+	                url: 'ajax_insert',
+	                data: JSON.stringify(postdata),
+	                dataType : 'JSON',
+	                contentType: "application/json",
+	                success: function(data){
+	                	if(data.result == "ok"){
+	                		location.reload();
+	                		alert("추가 성공");
+	                	}else{
+	                		alert("추가 도중 문제가 생겼습니다.");
+	                	}
+	                },
+	                error: function(request, status, error){
+	                    alert(error);
+	                }
+	            })
+			}
+			
+			function fn_update(){
+				var s_id = $('#s_id').val();
+				var s_name = $('#s_name').val();
+				var age = $('#age').val();
+				var address = $('#address').val();
+				
+	            var postdata = {
+	                's_id':s_id, 's_name':s_name, 'age':age, 'address':address
+	            }
+				
+				$.ajax({
+	                type: 'POST',
+	                url: 'ajax_update',
+	                data: JSON.stringify(postdata),
+	                dataType : 'JSON',
+	                contentType: "application/json",
+	                success: function(data){
+	                	if(data.result == "ok"){
+	                		location.reload();
+	                		alert("수정 성공");
+	                	}else{
+	                		alert("수정 도중 문제가 생겼습니다.");
+	                	}
+	                },
+	                error: function(request, status, error){
+	                    alert(error);
+	                }
+	            })
+			}
+			
+			function fn_delete(){
+				var flag = confirm("한번 지워진 데이터는 복구할 수 없습니다. 그래도 삭제하시겠습니까?");
+				
+				if(!flag){
+					return;
+				}
+				
+				var s_id = $('#s_id').val();
+				
+				var postdata = {
+	                's_id':s_id
+	            }
+				
+				$.ajax({
+	                type: 'POST',
+	                url: 'ajax_delete',
+	                data: JSON.stringify(postdata),
+	                dataType : 'JSON',
+	                contentType: "application/json",
+	                success: function(data){
+	                	if(data.result == "ok"){
+	                		location.reload();
+	                		alert("삭제 성공");
+	                	}else{
+	                		alert("삭제 도중 문제가 생겼습니다.");
+	                	}
+	                },
+	                error: function(request, status, error){
+	                    alert(error);
+	                }
+	            })
+			}
+		</script>
+		<style>
+			.container{
+				width : 800px;
+			}
+			.detailth{
+				width : 380px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container mt-3">
+			<h2 style="cursor:pointer;" onClick="location.href='http://127.0.0.1:5000/sawon'">사원 테이블</h2>
+			<br>
+			<table class="table table-hover">
+				<thead class="table-dark">
+					<tr>
+						<th>사번</th>
+						<th>이름</th>
+						<th>나이</th>
+						<th>주소</th>
+						<th>입사일</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for sawon in mylist %}
+					<tr class="s_tr" style="cursor:pointer;" onClick="location.href='javascript:fn_setdata(\'{{sawon.s_id}}\', \'{{sawon.s_name}}\', \'{{sawon.age}}\', \'{{sawon.address}}\', \'{{sawon.in_date}}\')'">
+						<td class="t_id">{{sawon.s_id}}</td>
+						<td class="t_name">{{sawon.s_name}}</td>
+						<td class="t_age">{{sawon.age}}</td>
+						<td class="t_address" style="text-align:left">{{sawon.address}}</td>
+						<td class="t_date">{{sawon.in_date}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<table id="detail-table" class="table table-hover">
+				<thead class="table-dark">
+					<tr>
+						<th class="detailth">항목</th>
+						<th class="detailth">내용</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="item">사번</td>
+						<td class="content"><input type="text" id="s_id" readOnly></td>	
+					</tr>
+					<tr>
+						<td class="item">이름</td>
+						<td class="content"><input type="text" id="s_name"></td>	
+					</tr>
+					<tr>
+						<td class="item">나이</td>
+						<td class="content"><input type="text" id="age"></td>	
+					</tr>
+					<tr>
+						<td class="item">주소</td>
+						<td class="content"><input type="text" id="address"></td>	
+					</tr>
+					<tr>
+						<td class="item">입사일</td>
+						<td class="content"><input type="text" id="in_date" readOnly></td>	
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="button" class="btn btn-primary" onclick="fn_insert()">추가</button>
+							<button type="button" class="btn btn-success" onclick="fn_update()">수정</button>
+							<button type="button" class="btn btn-danger" onclick="fn_delete()">삭제</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

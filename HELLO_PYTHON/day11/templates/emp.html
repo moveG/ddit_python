@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- <script src="{{url_for('static', filename='jquery-3.6.0.js')}}"></script> -->
+		<script src="js/jquery-3.6.0.js"></script>
+		<meta charset="UTF-8">
+		<title>EMP CRUD</title>
+		<script type="text/javascript">
+			function fn_setdata(e_id, e_name, age, sex, tel){
+				$('#e_id').val(e_id);
+				$('#e_name').val(e_name);
+				$('#age').val(age);
+				$('#sex').val(sex);
+				$('#tel').val(tel);
+			}
+		
+			/* function fn_setdata(e_id, e_name, age, sex, tel){
+				console.log(e_id, e_name, age, sex, tel);
+				
+				var obj_e_id		= document.getElementById("e_id");
+				var obj_e_name		= document.getElementById("e_name");
+				var obj_age			= document.getElementById("age");
+				var obj_sex			= document.getElementById("sex");
+				var obj_tel			= document.getElementById("tel");
+
+				obj_e_id.value		= e_id;
+				obj_e_name.value	= e_name;
+				obj_age.value		= age;
+				obj_sex.value		= sex;
+				obj_tel.value		= tel;
+			} */
+			
+			function fn_insert(){
+				var e_id = $('#e_id').val();
+				var e_name = $('#e_name').val();
+				var age = $('#age').val();
+				var sex = $('#sex').val();
+				var tel = $('#tel').val();
+	            
+	            var postdata = {
+	            	'e_id':e_id, 'e_name':e_name, 'age':age, 'sex':sex, 'tel':tel
+	            }
+				
+				$.ajax({
+	                type: 'POST',
+	                url: 'ajax_insert',
+	                data: JSON.stringify(postdata),
+	                dataType : 'JSON',
+	                contentType: "application/json",
+	                success: function(data){
+	                	if(data.result == "ok"){
+	                		location.reload();
+	                		alert("추가 성공");
+	                	}else{
+	                		alert("추가 도중 문제가 생겼습니다.");
+	                	}
+	                },
+	                error: function(request, status, error){
+	                    alert(error);
+	                }
+	            })
+			}
+			
+			function fn_update(){
+				var e_id = $('#e_id').val();
+				var e_name = $('#e_name').val();
+				var age = $('#age').val();
+				var sex = $('#sex').val();
+				var tel = $('#tel').val();
+	            
+	            var postdata = {
+	                'e_id':e_id, 'e_name':e_name, 'age':age, 'sex':sex, 'tel':tel
+	            }
+				
+				$.ajax({
+	                type: 'POST',
+	                url: 'ajax_update',
+	                data: JSON.stringify(postdata),
+	                dataType : 'JSON',
+	                contentType: "application/json",
+	                success: function(data){
+	                	if(data.result == "ok"){
+	                		location.reload();
+	                		alert("수정 성공");
+	                	}else{
+	                		alert("수정 도중 문제가 생겼습니다.");
+	                	}
+	                },
+	                error: function(request, status, error){
+	                    alert(error);
+	                }
+	            })
+			}
+			
+			function fn_delete(){
+				var flag = confirm("한번 지워진 데이터는 복구할 수 없습니다. 그래도 삭제하시겠습니까?");
+				
+				if(!flag){
+					return;
+				}
+				
+				var e_id = $('#e_id').val();
+				
+				var postdata = {
+	                'e_id':e_id
+	            }
+				
+				$.ajax({
+	                type: 'POST',
+	                url: 'ajax_delete',
+	                data: JSON.stringify(postdata),
+	                dataType : 'JSON',
+	                contentType: "application/json",
+	                success: function(data){
+	                	if(data.result == "ok"){
+	                		location.reload();
+	                		alert("삭제 성공");
+	                	}else{
+	                		alert("삭제 도중 문제가 생겼습니다.");
+	                	}
+	                },
+	                error: function(request, status, error){
+	                    alert(error);
+	                }
+	            })
+			}
+		</script>
+	</head>
+	<body id="body">
+		<table border="1">
+			<tr>
+				<td>사번</td>
+				<td>이름</td>
+				<td>나이</td>
+				<td>성별</td>
+				<td>전화</td>
+			</tr>
+			{% for emp in mylist %}
+			<tr>
+				<td><a href="javascript:fn_setdata('{{emp.e_id}}', '{{emp.e_name}}', '{{emp.age}}', '{{emp.sex}}', '{{emp.tel}}')" id="eid">{{emp.e_id}}</a></td>
+				<td>{{emp.e_name}}</td>
+				<td>{{emp.age}}</td>
+				<td>{{emp.sex}}</td>
+				<td>{{emp.tel}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<table>
+			<tr>
+				<td>사번</td>
+				<td><input type="text" id="e_id"></td>	
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" id="e_name"></td>	
+			</tr>
+			<tr>
+				<td>나이</td>
+				<td><input type="text" id="age"></td>	
+			</tr>
+			<tr>
+				<td>성별</td>
+				<td><input type="text" id="sex"></td>	
+			</tr>
+			<tr>
+				<td>전화</td>
+				<td><input type="text" id="tel"></td>	
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="추가" onclick="fn_insert()">
+					<input type="button" value="수정" onclick="fn_update()">
+					<input type="button" value="삭제" onclick="fn_delete()">
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

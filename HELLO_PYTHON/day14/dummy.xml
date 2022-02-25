@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Naver Open API - movie ::'이터널스'</title>
+		<link>https://search.naver.com</link>
+		<description>Naver Search Result</description>
+		<lastBuildDate>Mon, 15 Nov 2021 11:11:27 +0900</lastBuildDate>
+		<total>2</total>
+		<start>1</start>
+		<display>2</display>
+		<item>
+			<title>&lt;b&gt;이터널스&lt;/b&gt;</title>
+			<link>https://movie.naver.com/movie/bi/mi/basic.nhn?code=184311
+			</link>
+			<image>https://ssl.pstatic.net/imgmovie/mdi/mit110/1843/184311_P20_105808.jpg
+			</image>
+			<subtitle>Eternals</subtitle>
+			<pubDate>2021</pubDate>
+			<director>클로이 자오|</director>
+			<actor>안젤리나 졸리|마동석|리차드 매든|쿠마일 난지아니|셀마 헤이엑|젬마 찬|로런 리들로프|브라이언 타이리 헨리|배리
+				케오간|리아 맥휴|</actor>
+			<userRating>5.61</userRating>
+		</item>
+		<item>
+			<title>디 &lt;b&gt;이터널스&lt;/b&gt;</title>
+			<link>https://movie.naver.com/movie/bi/mi/basic.nhn?code=162192
+			</link>
+			<image>https://ssl.pstatic.net/imgmovie/mdi/mit110/1621/162192_P01_153350.gif
+			</image>
+			<subtitle>The Eternals</subtitle>
+			<pubDate>2017</pubDate>
+			<director>피에르-이브 반데위드|</director>
+			<actor></actor>
+			<userRating>0.00</userRating>
+		</item>
+	</channel>
+</rss>

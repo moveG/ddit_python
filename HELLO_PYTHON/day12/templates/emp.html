@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/jquery-3.6.0.js"></script>
+		<meta charset="UTF-8">
+		<title>EMP CRUD</title>
+		<script type="text/javascript">
+			function fn_call(){
+				var id = "id123";
+	            var password = "123123";
+	            var email = "fake@fake.com";
+
+	            var postdata = {
+	                'id':id, 'password':password, 'email':email
+	            }
+	            $.ajax({
+	                type: 'POST',
+	                url: 'ajax',
+	                data: JSON.stringify(postdata),
+	                dataType : 'JSON',
+	                contentType: "application/json",
+	                success: function(data){
+	                	console.log(data);
+	                    alert('성공! 데이터 값:' + data.result2['id'] + " " + data.result2['password'] + " " + data.result2['email'])
+	                },
+	                error: function(request, status, error){
+	                    alert('ajax 통신 실패')
+	                    alert(error);
+	                }
+	            })
+			}
+		</script>
+	</head>
+	<body>
+		<a href="javascript:fn_call()">AJAX</a>
+		
+		
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Out Of Index</title>
+	<script type="text/javascript">
+		function fn_init(){
+			var aa = [1, 2, 3];
+			
+			try {
+				noSuchVariable; // 스크립트는 여기서 죽습니다.
+			} catch (err) {
+				console.log("", err);
+			}
+		}
+	</script>
+</head>
+<body>
+	<a href="javascript:fn_init()">go</a>
+</body>
+</html>
